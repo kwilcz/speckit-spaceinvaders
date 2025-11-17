@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import GameCanvas from './components/GameCanvas'
 import StartScreen from './components/StartScreen'
 import GameOverScreen from './components/GameOverScreen'
@@ -12,53 +12,73 @@ function App() {
   const [score, setScore] = useState(0)
   const engineRef = useRef(null)
   const { inputState } = useInputHandler()
+  const gameStateRef = useRef('start')
 
+  // Initialize engine once
   useEffect(() => {
     if (!engineRef.current) {
       engineRef.current = createGameEngine()
     }
   }, [])
 
+  // Update engine's input state (doesn't cause state change)
   useEffect(() => {
-    if (engineRef.current) {
+    if (engineRef.current && gameStateRef.current === 'playing') {
       engineRef.current.setInputState(inputState)
     }
   }, [inputState])
 
+  // Sync game state changes from engine
   useEffect(() => {
-    if (engineRef.current && gameState === 'playing') {
+    if (engineRef.current && gameStateRef.current === 'playing') {
       const intervalId = setInterval(() => {
         const currentScore = engineRef.current.getScore()
-        const currentState = engineRef.current.getGameState()
+        const currentEngineState = engineRef.current.getGameState()
+        
         setScore(currentScore)
-        if (currentState !== gameState) {
-          setGameState(currentState)
+        
+        // Only update gameState if engine state changed
+        if (currentEngineState !== gameStateRef.current) {
+          gameStateRef.current = currentEngineState
+          setGameState(currentEngineState)
         }
-      }, 100)
+      }, 50)
       return () => clearInterval(intervalId)
     }
   }, [gameState])
 
-  const handleCanvasReady = (canvas) => {
+  const handleCanvasReady = useCallback((canvas) => {
     if (engineRef.current) {
       engineRef.current.attachCanvas(canvas)
     }
-  }
+  }, [])
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
+    gameStateRef.current = 'playing'
     setGameState('playing')
     if (engineRef.current) {
       engineRef.current.setGameState('playing')
     }
-  }
+  }, [])
 
-  const handleRestart = () => {
+  const handleRestart = useCallback(() => {
     setScore(0)
-    setGameState('playing')
     if (engineRef.current) {
+      engineRef.current.initGame()
       engineRef.current.setGameState('playing')
     }
-  }
+    gameStateRef.current = 'playing'
+    setGameState('playing')
+  }, [])
+
+  const handleNextLevel = useCallback(() => {
+    if (engineRef.current) {
+      engineRef.current.nextLevel()
+      engineRef.current.setGameState('playing')
+    }
+    gameStateRef.current = 'playing'
+    setGameState('playing')
+  }, [])
 
   return (
     <div className="app-container">
@@ -67,6 +87,14 @@ function App() {
       {gameState === 'start' && <StartScreen onStart={handleStart} />}
       {gameState === 'gameOver' && (
         <GameOverScreen score={score} onRestart={handleRestart} />
+      )}
+      {gameState === 'levelComplete' && (
+        <GameOverScreen 
+          score={score} 
+          onRestart={handleNextLevel} 
+          levelComplete 
+          level={engineRef.current?.getLevel()}
+        />
       )}
     </div>
   )

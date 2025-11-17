@@ -2,15 +2,21 @@ const ENEMY_WIDTH = 40
 const ENEMY_HEIGHT = 32
 const ENEMY_SPEED = 0.1
 const ENEMY_DESCENT = 24
-const GRID_COLS = 10
-const GRID_ROWS = 4
-const GRID_SPACING_X = 60
+const GRID_COLS = 8
+const GRID_ROWS = 5
+const GRID_SPACING_X = 70
 const GRID_SPACING_Y = 50
-const GRID_START_X = 80
-const GRID_START_Y = 60
+
+// Different formation patterns for variety
+const FORMATIONS = [
+  { startX: 60, startY: 40 },    // Formation 1: Left side
+  { startX: 80, startY: 50 },    // Formation 2: Center
+  { startX: 50, startY: 30 },    // Formation 3: Upper left
+]
 
 /**
- * Enemy grid manager
+ * Enemy grid manager with level progression
+ * Uses classic Space Invaders 8x5 grid with randomized starting position
  */
 export class EnemyGrid {
   constructor(stageWidth, stageHeight) {
@@ -21,16 +27,23 @@ export class EnemyGrid {
     this.speed = ENEMY_SPEED
     this.moveTimer = 0
     this.moveInterval = 800 // ms between horizontal moves
+    this.level = 1
     this.initialize()
+  }
+
+  getRandomFormation() {
+    return FORMATIONS[Math.floor(Math.random() * FORMATIONS.length)]
   }
 
   initialize() {
     this.enemies = []
+    const formation = this.getRandomFormation()
+    
     for (let row = 0; row < GRID_ROWS; row++) {
       for (let col = 0; col < GRID_COLS; col++) {
         this.enemies.push({
-          x: GRID_START_X + col * GRID_SPACING_X,
-          y: GRID_START_Y + row * GRID_SPACING_Y,
+          x: formation.startX + col * GRID_SPACING_X,
+          y: formation.startY + row * GRID_SPACING_Y,
           width: ENEMY_WIDTH,
           height: ENEMY_HEIGHT,
           alive: true,
@@ -44,7 +57,10 @@ export class EnemyGrid {
   update(delta) {
     this.moveTimer += delta
 
-    if (this.moveTimer >= this.moveInterval) {
+    // Decrease move interval based on level (faster enemies each level)
+    const levelAdjustedInterval = Math.max(300, 800 - (this.level - 1) * 80)
+
+    if (this.moveTimer >= levelAdjustedInterval) {
       this.moveTimer = 0
       this.moveHorizontal()
     }
@@ -101,9 +117,18 @@ export class EnemyGrid {
     return false
   }
 
+  nextLevel() {
+    this.level += 1
+    this.direction = 1
+    this.moveTimer = 0
+    this.initialize()
+  }
+
   reset() {
+    this.level = 1
     this.direction = 1
     this.moveTimer = 0
     this.initialize()
   }
 }
+

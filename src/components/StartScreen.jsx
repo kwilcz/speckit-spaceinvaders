@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import './StartScreen.css'
 
 const StartScreen = ({ onStart }) => {
+
   return (
     <div className="start-screen">
       <div className="start-content">
@@ -11,6 +12,7 @@ const StartScreen = ({ onStart }) => {
           <h3>CONTROLS</h3>
           <p><kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd> - Move</p>
           <p><kbd>SPACE</kbd> or <kbd>↑</kbd> - Shoot</p>
+          <p><kbd>ENTER</kbd> - Start/Restart</p>
         </div>
         <button className="start-button" onClick={onStart}>
           START GAME

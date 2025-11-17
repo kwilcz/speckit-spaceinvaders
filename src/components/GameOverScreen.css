@@ -12,6 +12,10 @@
   animation: fadeIn 0.5s ease-out;
 }
 
+.gameover-screen.victory {
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -37,6 +41,26 @@
   letter-spacing: 0.5rem;
 }
 
+.gameover-screen.victory .gameover-title {
+  color: #4ade80;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.8);
+}
+
+.gameover-screen.level-complete .gameover-title {
+  color: #22d3ee;
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.8);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(34, 211, 238, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(34, 211, 238, 1);
+  }
+}
+
 .gameover-message {
   font-size: 1.1rem;
   color: #94a3b8;
@@ -50,6 +74,16 @@
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+.gameover-screen.victory .final-score {
+  border-color: #22d3ee;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+}
+
+.gameover-screen.level-complete .final-score {
+  border-color: #fbbf24;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
 }
 
 .final-score h2 {

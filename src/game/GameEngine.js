@@ -77,6 +77,18 @@ export class GameEngine {
     this.state.screenShake = 0
   }
 
+  nextLevel() {
+    if (!this.canvas) return
+    const { width, height } = this.canvas
+    
+    this.player?.reset(width, height)
+    this.projectilePool?.reset()
+    this.enemyGrid?.nextLevel()
+    this.particleEngine?.reset()
+    this.state.screenShake = 0
+    // Keep score across levels
+  }
+
   start() {
     this.loop?.start()
   }
@@ -109,6 +121,12 @@ export class GameEngine {
       return
     }
 
+    // Check if player collided with enemy
+    if (this.collisionDetector.detectPlayerEnemyCollisions(this.player, this.enemyGrid.getAlive())) {
+      this.state.gameState = 'gameOver'
+      return
+    }
+
     // Detect collisions
     const collisions = this.collisionDetector.detectProjectileEnemyCollisions(
       this.projectilePool.getActive(),
@@ -122,6 +140,12 @@ export class GameEngine {
       this.particleEngine.createExplosion(collision.x, collision.y)
       this.state.score += POINTS_PER_ENEMY
       this.state.screenShake = 120 // ms of shake
+    }
+
+    // Check if all enemies are defeated
+    if (this.enemyGrid.getAlive().length === 0) {
+      this.state.gameState = 'levelComplete'
+      return
     }
 
     // Update particles
@@ -220,12 +244,20 @@ export class GameEngine {
     }
   }
 
+  reset() {
+    this.initGame()
+  }
+
   getScore() {
     return this.state.score
   }
 
   getGameState() {
     return this.state.gameState
+  }
+
+  getLevel() {
+    return this.enemyGrid?.level ?? 1
   }
 }
 
