@@ -1,0 +1,126 @@
+.gameover-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(2, 6, 23, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.gameover-screen.victory {
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.gameover-content {
+  text-align: center;
+  color: #e2e8f0;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.gameover-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #f87171;
+  text-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
+  margin-bottom: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+.gameover-screen.victory .gameover-title {
+  color: #4ade80;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.8);
+}
+
+.gameover-screen.level-complete .gameover-title {
+  color: #22d3ee;
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.8);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(34, 211, 238, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(34, 211, 238, 1);
+  }
+}
+
+.gameover-message {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+}
+
+.final-score {
+  background: rgba(15, 23, 42, 0.7);
+  border: 2px solid #4ade80;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+.gameover-screen.victory .final-score {
+  border-color: #22d3ee;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+}
+
+.gameover-screen.level-complete .final-score {
+  border-color: #fbbf24;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.final-score h2 {
+  color: #22d3ee;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.3rem;
+}
+
+.score-value {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #4ade80;
+  font-family: monospace;
+  text-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
+  margin: 0;
+}
+
+.restart-button {
+  background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%);
+  color: #0f172a;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(74, 222, 128, 0.4);
+}
+
+.restart-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(74, 222, 128, 0.6);
+}
+
+.restart-button:active {
+  transform: translateY(0);
+}
