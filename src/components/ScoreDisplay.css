@@ -1,0 +1,26 @@
+.score-display {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e2e8f0;
+  font-family: monospace;
+  text-shadow: 0 0 10px rgba(148, 163, 184, 0.5);
+  z-index: 5;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid #334155;
+}
+
+.score-label {
+  color: #22d3ee;
+  margin-right: 0.5rem;
+  letter-spacing: 0.1rem;
+}
+
+.score-value {
+  color: #4ade80;
+  letter-spacing: 0.2rem;
+}

@@ -24,11 +24,11 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Initialize React project using Vite in root directory
-- [ ] T002 Install dependencies with npm install
-- [ ] T003 Add GitHub Pages deployment with gh-pages package
-- [ ] T004 Configure vite.config.js with correct base path for GitHub Pages
-- [ ] T005 Create folder structure: src/game, src/components, public/assets
+- [X] T001 Initialize React project using Vite in root directory
+- [X] T002 Install dependencies with npm install
+- [X] T003 Add GitHub Pages deployment with gh-pages package
+- [X] T004 Configure vite.config.js with correct base path for GitHub Pages
+- [X] T005 Create folder structure: src/game, src/components, public/assets
 
 ---
 
@@ -38,10 +38,10 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Create GameCanvas component with <canvas> ref in src/components/GameCanvas.jsx
-- [ ] T007 Implement game loop using requestAnimationFrame in src/game/GameLoop.js
-- [ ] T008 Implement update() and render() functions in src/game/GameEngine.js
-- [ ] T009 Implement keyboard input hooks in src/game/InputHandler.js
+- [X] T006 Create GameCanvas component with <canvas> ref in src/components/GameCanvas.jsx
+- [X] T007 Implement game loop using requestAnimationFrame in src/game/GameLoop.js
+- [X] T008 Implement update() and render() functions in src/game/GameEngine.js
+- [X] T009 Implement keyboard input hooks in src/game/InputHandler.js
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -55,12 +55,12 @@
 
 ### Implementation for User Story 1
 
-- [ ] T010 [P] [US1] Create Player class/module in src/game/entities/Player.js
-- [ ] T011 [US1] Implement horizontal movement and shot firing in src/game/entities/Player.js
-- [ ] T012 [P] [US1] Create Bullet pool system in src/game/entities/Projectile.js
-- [ ] T013 [P] [US1] Create Enemy module with grid generation in src/game/entities/Enemy.js
-- [ ] T014 [US1] Implement enemy movement pattern (side-to-side + descend) in src/game/entities/Enemy.js
-- [ ] T015 [US1] Add collision detection for bullets vs enemies in src/game/CollisionDetector.js
+- [X] T010 [P] [US1] Create Player class/module in src/game/entities/Player.js
+- [X] T011 [US1] Implement horizontal movement and shot firing in src/game/entities/Player.js
+- [X] T012 [P] [US1] Create Bullet pool system in src/game/entities/Projectile.js
+- [X] T013 [P] [US1] Create Enemy module with grid generation in src/game/entities/Enemy.js
+- [X] T014 [US1] Implement enemy movement pattern (side-to-side + descend) in src/game/entities/Enemy.js
+- [X] T015 [US1] Add collision detection for bullets vs enemies in src/game/CollisionDetector.js
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -74,10 +74,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T016 [P] [US2] Create ParticleSystem helper in src/game/ParticleEngine.js
-- [ ] T017 [US2] Add explosion effect on enemy death in src/game/ParticleEngine.js
-- [ ] T018 [US2] Implement screen shake using camera offset in src/game/GameEngine.js
-- [ ] T019 [P] [US2] Add frame-blending glow effects in src/game/ParticleEngine.js
+- [X] T016 [P] [US2] Create ParticleSystem helper in src/game/ParticleEngine.js
+- [X] T017 [US2] Add explosion effect on enemy death in src/game/ParticleEngine.js
+- [X] T018 [US2] Implement screen shake using camera offset in src/game/GameEngine.js
+- [X] T019 [P] [US2] Add frame-blending glow effects in src/game/ParticleEngine.js
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -91,9 +91,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T020 [P] [US3] Add start screen overlay in src/components/StartScreen.jsx
-- [ ] T021 [P] [US3] Add game-over overlay in src/components/GameOverScreen.jsx
-- [ ] T022 [US3] Add score display in src/components/ScoreDisplay.jsx
+- [X] T020 [P] [US3] Add start screen overlay in src/components/StartScreen.jsx
+- [X] T021 [P] [US3] Add game-over overlay in src/components/GameOverScreen.jsx
+- [X] T022 [US3] Add score display in src/components/ScoreDisplay.jsx
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -103,7 +103,7 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T023 Set correct homepage/base in vite config for deployment
+- [X] T023 Set correct homepage/base in vite config for deployment
 - [ ] T024 Run npm run build to create production bundle
 - [ ] T025 Push dist to gh-pages branch for deployment
 - [ ] T026 Verify GitHub Pages loads correctly
